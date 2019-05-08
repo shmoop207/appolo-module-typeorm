@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/shmoop207/appolo-module-typeorm"
   },
   "author": {
     "name": "roman svichar"

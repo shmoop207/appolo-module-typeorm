@@ -4,7 +4,7 @@ import {TypeOrmModule} from "./module/typeOrmModule";
 import {ModelRepository} from "./module/src/modelRepository";
 import {IOptions} from "./module/src/interfaces";
 
-export import typeorm = require('typeorm');
+export * from 'typeorm';
 
 export {
     IOptions,
