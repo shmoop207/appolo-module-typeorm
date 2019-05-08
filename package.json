@@ -1,0 +1,29 @@
+{
+  "name": "@appolo/typeorm",
+  "version": "0.0.11",
+  "description": "",
+  "private": false,
+  "keywords": [],
+  "main": "index.js",
+  "dependencies": {
+    "@appolo/logger": "^1.0.3",
+    "appolo": "^6.0.68",
+    "bluebird": "^3.5.4",
+    "lodash": "^4.17.11",
+    "typeorm": "^0.2.16"
+  },
+  "devDependencies": {
+    "@types/bluebird": "^3.5.20",
+    "@types/lodash": "^4.14.108",
+    "@types/node": "^9.6.6",
+    "typescript": "^2.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": {
+    "name": "roman svichar"
+  },
+  "license": "MIT"
+}
