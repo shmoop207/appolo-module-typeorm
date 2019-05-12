@@ -2,9 +2,11 @@
   "name": "@appolo/typeorm",
   "version": "0.0.12",
   "description": "",
-  "private": false,
   "keywords": [],
   "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@appolo/logger": "^1.0.3",
     "appolo": "^6.0.68",
