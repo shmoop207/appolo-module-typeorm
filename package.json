@@ -1,6 +1,6 @@
 {
   "name": "@appolo/typeorm",
-  "version": "0.0.12",
+  "version": "7.0.0",
   "description": "",
   "keywords": [],
   "main": "index.js",
@@ -8,17 +8,17 @@
     "access": "public"
   },
   "dependencies": {
-    "@appolo/logger": "^1.0.3",
-    "appolo": "^6.0.68",
-    "bluebird": "^3.5.4",
-    "lodash": "^4.17.11",
-    "typeorm": "^0.2.17"
+    "@appolo/logger": "^7.0.1",
+    "appolo": "^7.0.2",
+    "bluebird": "^3.7.2",
+    "lodash": "^4.17.15",
+    "typeorm": "^0.2.24"
   },
   "devDependencies": {
-    "@types/bluebird": "^3.5.26",
-    "@types/lodash": "^4.14.124",
-    "@types/node": "^12.0.0",
-    "typescript": "^3.4.5"
+    "@types/bluebird": "^3.5.30",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^13.11.1",
+    "typescript": "^3.8.3"
   },
   "repository": {
     "type": "git",
