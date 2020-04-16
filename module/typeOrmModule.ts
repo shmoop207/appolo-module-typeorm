@@ -13,6 +13,10 @@ export class TypeOrmModule extends Module<IOptions> {
         super(options)
     }
 
+    public static for(options: IOptions): TypeOrmModule {
+        return new TypeOrmModule(options)
+    }
+
     protected readonly Defaults: Partial<IOptions> = {
         id: "modelRepository"
     };
@@ -21,7 +25,7 @@ export class TypeOrmModule extends Module<IOptions> {
         return [{id: this.moduleOptions.id, type: ModelRepository}];
     }
 
-    protected afterInitialize() {
+    public afterInitialize() {
 
         let modules = Util.findAllReflectData<string>(ModelKey, this.parent.exported);
         _.forEach(modules, item => {

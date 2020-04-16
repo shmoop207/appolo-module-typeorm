@@ -1,4 +1,5 @@
 "use strict";
+var TypeOrmModule_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 const tslib_1 = require("tslib");
 const appolo_1 = require("appolo");
@@ -6,12 +7,15 @@ const modelRepository_1 = require("./src/modelRepository");
 const decorator_1 = require("./src/decorator");
 const modelFactory_1 = require("./src/modelFactory");
 const _ = require("lodash");
-let TypeOrmModule = class TypeOrmModule extends appolo_1.Module {
+let TypeOrmModule = TypeOrmModule_1 = class TypeOrmModule extends appolo_1.Module {
     constructor(options) {
         super(options);
         this.Defaults = {
             id: "modelRepository"
         };
+    }
+    static for(options) {
+        return new TypeOrmModule_1(options);
     }
     get exports() {
         return [{ id: this.moduleOptions.id, type: modelRepository_1.ModelRepository }];
@@ -36,7 +40,7 @@ let TypeOrmModule = class TypeOrmModule extends appolo_1.Module {
         });
     }
 };
-TypeOrmModule = tslib_1.__decorate([
+TypeOrmModule = TypeOrmModule_1 = tslib_1.__decorate([
     appolo_1.module()
 ], TypeOrmModule);
 exports.TypeOrmModule = TypeOrmModule;
