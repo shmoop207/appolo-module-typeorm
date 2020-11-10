@@ -1,5 +1,6 @@
 "use strict";
-import {define, factory, IFactory, inject, singleton, Util, IApp} from 'appolo';
+import {define, factory, IFactory, inject, singleton} from '@appolo/inject';
+import { IApp} from '@appolo/core';
 import {ILogger} from "@appolo/logger";
 import {createConnection} from "typeorm";
 import {Connection} from "typeorm";

@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import {Util} from 'appolo';
+import {Util} from '@appolo/core';
 import {EntitySchema, ObjectType} from "typeorm";
 
 
