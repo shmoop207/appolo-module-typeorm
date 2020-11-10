@@ -1,4 +1,4 @@
-import {define, inject, injectAlias, singleton} from 'appolo';
+import {define, inject, singleton} from '@appolo/inject';
 import {Connection, EntitySchema, ObjectType, BaseEntity, Repository} from "typeorm";
 
 @define()

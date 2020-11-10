@@ -1,8 +1,7 @@
 import {ConnectionOptions} from "typeorm";
 import {EntitySchema} from "typeorm";
-import {IModuleOptions} from "appolo";
 
-export interface IOptions extends IModuleOptions {
+export interface IOptions {
     id?: string,
     config: ConnectionOptions
 }

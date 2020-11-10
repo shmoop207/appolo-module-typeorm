@@ -1,4 +1,4 @@
-import {IFactory} from 'appolo';
+import {IFactory} from '@appolo/inject';
 import {EntitySchema, Repository} from "typeorm";
 import {Connection} from "typeorm";
 

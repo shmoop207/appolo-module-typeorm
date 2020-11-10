@@ -9,7 +9,7 @@ const decorator_1 = require("./decorator");
 let Client = class Client {
     async get() {
         try {
-            let modules = Util.findAllReflectData(decorator_1.ModelKey, this.app.parent.exported);
+            let modules = this.app.tree.parent.discovery.findAllReflectData(decorator_1.ModelKey);
             let entities = _.map(modules, module => module.fn);
             let config = _.defaults({}, this.moduleOptions.config, { synchronize: true, type: "postgres", entities });
             const client = await typeorm_1.createConnection(config);

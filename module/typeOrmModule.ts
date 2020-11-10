@@ -1,4 +1,4 @@
-import {module, Module, Util} from 'appolo';
+import {module, Module,IModuleParams} from '@appolo/engine';
 import {ModelRepository} from "./src/modelRepository";
 import {InjectModelKey, ModelKey} from "./src/decorator";
 import {EntitySchema, ObjectType} from "typeorm";
@@ -9,12 +9,10 @@ import {IOptions} from "./src/interfaces";
 @module()
 export class TypeOrmModule extends Module<IOptions> {
 
-    constructor(options: IOptions) {
-        super(options)
-    }
 
-    public static for(options: IOptions): TypeOrmModule {
-        return new TypeOrmModule(options)
+
+    public static for(options: IOptions): IModuleParams {
+        return {type: TypeOrmModule, options}
     }
 
     protected readonly Defaults: Partial<IOptions> = {
@@ -25,9 +23,9 @@ export class TypeOrmModule extends Module<IOptions> {
         return [{id: this.moduleOptions.id, type: ModelRepository}];
     }
 
-    public afterInitialize() {
+    public beforeModuleLaunch() {
 
-        let modules = Util.findAllReflectData<string>(ModelKey, this.parent.exported);
+        let modules = this.parent.discovery.findAllReflectData<string>(ModelKey);
         _.forEach(modules, item => {
 
             this.app.injector.register(item.metaData, ModelFactory)
@@ -39,17 +37,18 @@ export class TypeOrmModule extends Module<IOptions> {
         });
 
 
-        let injectModules = Util.findAllReflectData<{ propertyKey: string, model: EntitySchema<any> }[]>(InjectModelKey, this.parent.exported);
+        let injectModules = this.parent.discovery.findAllReflectData<{ propertyKey: string, model: EntitySchema<any> }[]>(InjectModelKey);
 
         _.forEach(injectModules, item => {
 
-            let define = Util.getClassDefinition(item.fn);
+            let define =  this.parent.injector.getDefinition(item.fn);
+
 
             _.forEach(item.metaData, metaData => {
 
-                let modelName = Util.getReflectData<string>(ModelKey, metaData.model);
+                let modelName = this.parent.discovery.getReflectMetadata<string>(ModelKey, metaData.model);
 
-                define.inject({name: metaData.propertyKey, ref: modelName, injector: this.app.injector})
+                define.inject.push({name: metaData.propertyKey, ref: modelName, injector: this.app.injector})
             })
         });
 

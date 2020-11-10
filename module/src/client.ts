@@ -1,5 +1,6 @@
 "use strict";
 import {define, factory, IFactory, inject, singleton} from '@appolo/inject';
+import {Discovery} from '@appolo/engine';
 import { IApp} from '@appolo/core';
 import {ILogger} from "@appolo/logger";
 import {createConnection} from "typeorm";
@@ -7,7 +8,6 @@ import {Connection} from "typeorm";
 import {IOptions} from "./interfaces";
 import _ = require('lodash');
 import {ModelKey} from "./decorator";
-
 
 @define()
 @singleton()
@@ -22,7 +22,7 @@ export class Client implements IFactory<Connection> {
 
         try {
 
-            let modules = Util.findAllReflectData<string>(ModelKey, this.app.parent.exported);
+            let modules = this.app.tree.parent.discovery.findAllReflectData<string>(ModelKey);
 
             let entities = _.map(modules, module => module.fn);
 
