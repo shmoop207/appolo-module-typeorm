@@ -4,15 +4,20 @@ exports.Client = void 0;
 const tslib_1 = require("tslib");
 const inject_1 = require("@appolo/inject");
 const typeorm_1 = require("typeorm");
-const _ = require("lodash");
+const utils_1 = require("@appolo/utils");
 const decorator_1 = require("./decorator");
 let Client = class Client {
     async get() {
         try {
             let modules = this.app.tree.parent.discovery.findAllReflectData(decorator_1.ModelKey);
-            let entities = _.map(modules, module => module.fn);
-            let config = _.defaults({}, this.moduleOptions.config, { synchronize: true, type: "postgres", entities });
-            const client = await typeorm_1.createConnection(config);
+            let entities = modules.map(module => module.fn);
+            let config = utils_1.Objects.defaults({}, this.moduleOptions.config, {
+                synchronize: true,
+                type: "postgres",
+                entities
+            });
+            const client = new typeorm_1.DataSource(config);
+            await client.initialize();
             this.logger.info(`connected to ${this.moduleOptions.id}`);
             return client;
         }
@@ -23,18 +28,18 @@ let Client = class Client {
     }
 };
 tslib_1.__decorate([
-    inject_1.inject()
+    (0, inject_1.inject)()
 ], Client.prototype, "logger", void 0);
 tslib_1.__decorate([
-    inject_1.inject()
+    (0, inject_1.inject)()
 ], Client.prototype, "moduleOptions", void 0);
 tslib_1.__decorate([
-    inject_1.inject()
+    (0, inject_1.inject)()
 ], Client.prototype, "app", void 0);
 Client = tslib_1.__decorate([
-    inject_1.define(),
-    inject_1.singleton(),
-    inject_1.factory()
+    (0, inject_1.define)(),
+    (0, inject_1.singleton)(),
+    (0, inject_1.factory)()
 ], Client);
 exports.Client = Client;
 //# sourceMappingURL=client.js.map

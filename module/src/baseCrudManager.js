@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BaseCrudManager = void 0;
 class BaseCrudManager {
     async getById(id) {
-        return this._repo.findOne(id);
+        return this._repo.findOneBy({ id });
     }
     async getAllToStream(params = {}) {
         const { query } = await this._buildQueryForGetAll(params);

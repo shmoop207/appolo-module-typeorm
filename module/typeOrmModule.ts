@@ -3,7 +3,7 @@ import {ModelRepository} from "./src/modelRepository";
 import {InjectModelKey, ModelKey} from "./src/decorator";
 import {EntitySchema, ObjectType} from "typeorm";
 import {ModelFactory} from "./src/modelFactory";
-import _ = require('lodash');
+import {Arrays} from "@appolo/utils";
 import {IOptions} from "./src/interfaces";
 
 @module()
@@ -26,7 +26,7 @@ export class TypeOrmModule extends Module<IOptions> {
     public beforeModuleLaunch() {
 
         let modules = this.parent.discovery.findAllReflectData<string>(ModelKey);
-        _.forEach(modules, item => {
+        Arrays.forEach(modules, item => {
 
             this.app.injector.register(item.metaData, ModelFactory)
                 .inject("connection", "client")
@@ -39,12 +39,12 @@ export class TypeOrmModule extends Module<IOptions> {
 
         let injectModules = this.parent.discovery.findAllReflectData<{ propertyKey: string, model: EntitySchema<any> }[]>(InjectModelKey);
 
-        _.forEach(injectModules, item => {
+        Arrays.forEach(injectModules, item => {
 
             let define =  this.parent.injector.getDefinition(item.fn);
 
 
-            _.forEach(item.metaData, metaData => {
+            Arrays.forEach(item.metaData, metaData => {
 
                 let modelName = this.parent.discovery.getReflectMetadata<string>(ModelKey, metaData.model);
 

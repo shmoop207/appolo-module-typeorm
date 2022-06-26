@@ -7,7 +7,7 @@ const engine_1 = require("@appolo/engine");
 const modelRepository_1 = require("./src/modelRepository");
 const decorator_1 = require("./src/decorator");
 const modelFactory_1 = require("./src/modelFactory");
-const _ = require("lodash");
+const utils_1 = require("@appolo/utils");
 let TypeOrmModule = TypeOrmModule_1 = class TypeOrmModule extends engine_1.Module {
     constructor() {
         super(...arguments);
@@ -23,7 +23,7 @@ let TypeOrmModule = TypeOrmModule_1 = class TypeOrmModule extends engine_1.Modul
     }
     beforeModuleLaunch() {
         let modules = this.parent.discovery.findAllReflectData(decorator_1.ModelKey);
-        _.forEach(modules, item => {
+        utils_1.Arrays.forEach(modules, item => {
             this.app.injector.register(item.metaData, modelFactory_1.ModelFactory)
                 .inject("connection", "client")
                 .singleton()
@@ -32,9 +32,9 @@ let TypeOrmModule = TypeOrmModule_1 = class TypeOrmModule extends engine_1.Modul
                 .factory();
         });
         let injectModules = this.parent.discovery.findAllReflectData(decorator_1.InjectModelKey);
-        _.forEach(injectModules, item => {
+        utils_1.Arrays.forEach(injectModules, item => {
             let define = this.parent.injector.getDefinition(item.fn);
-            _.forEach(item.metaData, metaData => {
+            utils_1.Arrays.forEach(item.metaData, metaData => {
                 let modelName = this.parent.discovery.getReflectMetadata(decorator_1.ModelKey, metaData.model);
                 define.inject.push({ name: metaData.propertyKey, ref: modelName, injector: this.app.injector });
             });
@@ -42,7 +42,7 @@ let TypeOrmModule = TypeOrmModule_1 = class TypeOrmModule extends engine_1.Modul
     }
 };
 TypeOrmModule = TypeOrmModule_1 = tslib_1.__decorate([
-    engine_1.module()
+    (0, engine_1.module)()
 ], TypeOrmModule);
 exports.TypeOrmModule = TypeOrmModule;
 //# sourceMappingURL=typeOrmModule.js.map

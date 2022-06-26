@@ -1,9 +1,9 @@
-import {ConnectionOptions} from "typeorm";
+import {DataSourceOptions} from "typeorm";
 import {EntitySchema} from "typeorm";
 
 export interface IOptions {
     id?: string,
-    config: ConnectionOptions
+    config: DataSourceOptions
 }
 
 export interface GetAllParams<T> {

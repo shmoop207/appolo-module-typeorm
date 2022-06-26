@@ -9,7 +9,7 @@ export abstract class BaseCrudManager<K> {
     protected abstract _repo: Repository<K>;
 
     public async getById(id: string) {
-        return this._repo.findOne(id);
+        return this._repo.findOneBy({id} as any);
     }
 
     public async getAllToStream(params: GetAllParams<Partial<K>> = {}): Promise<ReadStream> {
@@ -19,7 +19,7 @@ export abstract class BaseCrudManager<K> {
 
     }
 
-    public async getAll(params: GetAllParams<Partial<K>> = {}): Promise<{ results: [], count: number } > {
+    public async getAll(params: GetAllParams<Partial<K>> = {}): Promise<{ results: [], count: number }> {
 
         const {query, count} = await this._buildQueryForGetAll(params);
 

@@ -12,11 +12,11 @@ let ModelRepository = class ModelRepository {
     }
 };
 tslib_1.__decorate([
-    inject_1.inject()
+    (0, inject_1.inject)()
 ], ModelRepository.prototype, "client", void 0);
 ModelRepository = tslib_1.__decorate([
-    inject_1.define(),
-    inject_1.singleton()
+    (0, inject_1.define)(),
+    (0, inject_1.singleton)()
 ], ModelRepository);
 exports.ModelRepository = ModelRepository;
 //# sourceMappingURL=modelRepository.js.map

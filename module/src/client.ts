@@ -1,34 +1,40 @@
 "use strict";
 import {define, factory, IFactory, inject, singleton} from '@appolo/inject';
 import {Discovery} from '@appolo/engine';
-import { IApp} from '@appolo/core';
+import {IApp} from '@appolo/core';
 import {ILogger} from "@appolo/logger";
-import {createConnection} from "typeorm";
-import {Connection} from "typeorm";
+import {createConnection, DataSourceOptions} from "typeorm";
+import {DataSource} from "typeorm";
+import {Arrays, Objects} from "@appolo/utils";
 import {IOptions} from "./interfaces";
-import _ = require('lodash');
 import {ModelKey} from "./decorator";
 
 @define()
 @singleton()
 @factory()
-export class Client implements IFactory<Connection> {
+export class Client implements IFactory<DataSource> {
 
     @inject() logger: ILogger;
     @inject() moduleOptions: IOptions;
     @inject() app: IApp;
 
-    public async get(): Promise<Connection> {
+    public async get(): Promise<DataSource> {
 
         try {
 
             let modules = this.app.tree.parent.discovery.findAllReflectData<string>(ModelKey);
 
-            let entities = _.map(modules, module => module.fn);
+            let entities = modules.map(module => module.fn);
 
-            let config = _.defaults({}, this.moduleOptions.config, {synchronize: true, type: "postgres", entities});
+            let config: DataSourceOptions = Objects.defaults({}, this.moduleOptions.config as any, {
+                synchronize: true,
+                type: "postgres",
+                entities
+            });
 
-            const client = await createConnection(config);
+            const client = new DataSource(config);
+
+            await client.initialize();
 
             this.logger.info(`connected to ${this.moduleOptions.id}`);
 

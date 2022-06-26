@@ -1,6 +1,6 @@
 {
   "name": "@appolo/typeorm",
-  "version": "8.0.1",
+  "version": "8.1.0",
   "description": "",
   "keywords": [],
   "main": "index.js",
@@ -8,15 +8,14 @@
     "access": "public"
   },
   "dependencies": {
-    "@appolo/logger": "^8.0.4",
-    "@appolo/core": "^8.0.5",
-    "lodash": "^4.17.20",
-    "typeorm": "^0.2.29"
+    "@appolo/core": "^8.0.9",
+    "@appolo/logger": "^8.0.6",
+    "@appolo/utils": "^8.0.38",
+    "typeorm": "^0.3.6"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.165",
-    "@types/node": "^14.14.7",
-    "typescript": "^4.0.5"
+    "@types/node": "^18.0.0",
+    "typescript": "^4.7.4"
   },
   "repository": {
     "type": "git",
